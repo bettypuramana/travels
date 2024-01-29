@@ -1,0 +1,74 @@
+<?php
+
+
+
+class Auth_model extends MY_Model //extend MY_model from CI_model in core
+
+{
+
+	var $table = 'users';
+
+
+
+	public function __construct() // Call the CI_Model constructor
+
+	{
+
+	    parent::__construct();
+
+    }
+
+
+
+	public function loginWithCredentials($email) //check email id and password are equal with DB email id and password.
+
+	{
+
+	    $this->db->select('*');
+
+	    $this->db->from($this->table);
+
+	    $this->db->where('email', $email);
+
+	    $this->db->where('status',1);
+
+	    $query = $this->db->get();
+
+	    return $query->row();
+
+	}
+
+	public function paymentStatus($id) //check email id and password are equal with DB email id and password.
+
+	{
+
+	    $this->db->select('payment_status as status,exp_date');
+
+	    $this->db->from('institute');
+
+	    $this->db->where('institute_id', $id);
+
+	    $query = $this->db->get();
+
+	    return $query->row();
+
+	}
+	
+	
+	public function getInstituteData($id) //check email id and password are equal with DB email id and password.
+
+	{
+
+	    $this->db->select('name,image');
+
+	    $this->db->from('institute');
+
+	    $this->db->where('institute_id', $id);
+
+	    $query = $this->db->get();
+
+	    return $query->row();
+
+	}
+
+}
